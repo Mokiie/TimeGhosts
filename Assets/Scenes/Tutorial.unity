@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 22141619}
   - component: {fileID: 22141618}
   m_Layer: 6
-  m_Name: Cylinder
+  m_Name: tutorial button1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,11 +438,11 @@ Transform:
   m_GameObject: {fileID: 22141613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.373004, y: 8.63, z: -6.255371}
+  m_LocalPosition: {x: 4.373004, y: 8.63, z: -6.2553706}
   m_LocalScale: {x: 1, y: 0.083541244, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 236081102}
+  m_Father: {fileID: 753044032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &22141618
 MonoBehaviour:
@@ -458,7 +458,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 498087796}
   moveSpeed: 8
-  heightDif: -10
+  distance: -10
+  x: 0
+  y: 1
+  z: 0
+  otherColliders: 3
 --- !u!114 &22141619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,7 +477,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 616297214}
   moveSpeed: 3
-  heightDif: 10
+  distance: -10
+  x: 0
+  y: 1
+  z: 0
+  otherColliders: 3
 --- !u!1 &32905824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,11 +2112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a13733c94138046908ab3920cd80af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 0}
-  player: {fileID: 0}
-  playerObject: {fileID: 0}
-  rigidBody: {fileID: 0}
-  rotationSpeed: 7
 --- !u!114 &234363103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2350,10 +2353,6 @@ Transform:
   - {fileID: 924199647}
   - {fileID: 101070709}
   - {fileID: 2112215584}
-  - {fileID: 22141617}
-  - {fileID: 1771903944}
-  - {fileID: 1310125187}
-  - {fileID: 345241879}
   - {fileID: 2047984139}
   - {fileID: 1463503213}
   - {fileID: 941431339}
@@ -2363,6 +2362,7 @@ Transform:
   - {fileID: 1475998563}
   - {fileID: 1350494790}
   - {fileID: 1535024190}
+  - {fileID: 753044032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &247615227
@@ -2809,7 +2809,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 282337191}
   moveSpeed: 15
-  heightDif: 10
+  distance: 10
+  x: 0
+  y: 1
+  z: 0
+  otherColliders: 2
 --- !u!1 &299271297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,7 +3380,7 @@ GameObject:
   - component: {fileID: 345241881}
   - component: {fileID: 345241880}
   m_Layer: 6
-  m_Name: Cylinder (3)
+  m_Name: MidButtonFirstBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3391,11 +3395,11 @@ Transform:
   m_GameObject: {fileID: 345241878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.798, y: 8.654, z: 13.6}
+  m_LocalPosition: {x: 7.798, y: 8.654001, z: 13.6}
   m_LocalScale: {x: 1, y: 0.083541244, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 236081102}
+  m_Father: {fileID: 753044032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &345241880
 MonoBehaviour:
@@ -3409,9 +3413,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d14b2496b62fc418a5663d539f2499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 0}
+  door: {fileID: 941955806}
   moveSpeed: 3
-  heightDif: 10
+  distance: -5
+  x: 1
+  y: 0
+  z: 0
+  otherColliders: 2
 --- !u!136 &345241881
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5798,7 +5806,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658678355}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14062962, y: -0.00015802562, z: 0.000022446146, w: 0.9900623}
+  m_LocalRotation: {x: 0.14062962, y: -0.00015803406, z: 0.000022447348, w: 0.9900623}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6300,6 +6308,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749912801}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &753044031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 753044032}
+  m_Layer: 6
+  m_Name: pressurepoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &753044032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753044031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1310125187}
+  - {fileID: 22141617}
+  - {fileID: 1771903944}
+  - {fileID: 345241879}
+  m_Father: {fileID: 236081102}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &754757800
 GameObject:
   m_ObjectHideFlags: 3
@@ -7664,7 +7707,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866587206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094459996, y: -0.00015890667, z: 0.000015077738, w: 0.9955287}
+  m_LocalRotation: {x: 0.094459996, y: -0.0001588981, z: 0.000015076927, w: 0.9955287}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8608,7 +8651,7 @@ GameObject:
   - component: {fileID: 941955809}
   - component: {fileID: 941955808}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: Firstbridge cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11038,7 +11081,7 @@ GameObject:
   - component: {fileID: 1310125189}
   - component: {fileID: 1310125188}
   m_Layer: 6
-  m_Name: Cylinder (2)
+  m_Name: pressurpoint rightfromdoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11057,7 +11100,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.083541244, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 236081102}
+  m_Father: {fileID: 753044032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1310125188
 MonoBehaviour:
@@ -11071,9 +11114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d14b2496b62fc418a5663d539f2499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 0}
+  door: {fileID: 1350494789}
   moveSpeed: 3
-  heightDif: 10
+  distance: 10
+  x: 1
+  y: 0
+  z: 0
+  otherColliders: 3
 --- !u!136 &1310125189
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11174,7 +11221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344301886}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18082435, y: -0.00015728544, z: 0.000028917731, w: 0.98351544}
+  m_LocalRotation: {x: 0.18082435, y: -0.00015725159, z: 0.000028911507, w: 0.98351544}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11241,7 +11288,7 @@ GameObject:
   - component: {fileID: 1350494792}
   - component: {fileID: 1350494791}
   m_Layer: 6
-  m_Name: Cube (2)
+  m_Name: MiddleBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12965,7 +13012,7 @@ GameObject:
   - component: {fileID: 1535024192}
   - component: {fileID: 1535024191}
   m_Layer: 6
-  m_Name: Cube (3)
+  m_Name: FinalBridgeTriggerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13400,7 +13447,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582496705}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18082438, y: -0.00015730235, z: 0.000028920846, w: 0.98351544}
+  m_LocalRotation: {x: 0.18082438, y: -0.00015723465, z: 0.000028908402, w: 0.98351544}
   m_LocalPosition: {x: 45.434715, y: 70.24564, z: -6.1161585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15222,9 +15269,8 @@ MonoBehaviour:
   cam: {fileID: 1582496706}
   gravityMultiplier: 2
   jumpPower: 6.83
-  ghost: {fileID: 11400000, guid: 84b4b91eb29f1574f9048371eac5f77b, type: 2}
   spawnPoint: {fileID: 400714067}
-  ghostPlayer: {fileID: 0}
+  ghostPlayers: []
 --- !u!114 &1760815999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15237,7 +15283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1273a2d550135174098038e2e16dc78e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 11400000, guid: 84b4b91eb29f1574f9048371eac5f77b, type: 2}
+  ghostList: []
+  timer: 0
+  timeValue: 0
+  ghostIndex: 0
 --- !u!65 &1760816000
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15315,7 +15364,7 @@ GameObject:
   - component: {fileID: 1771903946}
   - component: {fileID: 1771903945}
   m_Layer: 6
-  m_Name: Cylinder (1)
+  m_Name: leftTriggerFinalBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15334,7 +15383,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.083541244, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 236081102}
+  m_Father: {fileID: 753044032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1771903945
 MonoBehaviour:
@@ -15348,9 +15397,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d14b2496b62fc418a5663d539f2499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 0}
+  door: {fileID: 1535024189}
   moveSpeed: 3
-  heightDif: 10
+  distance: 10
+  x: 1
+  y: 0
+  z: 0
+  otherColliders: 3
 --- !u!136 &1771903946
 CapsuleCollider:
   m_ObjectHideFlags: 0
