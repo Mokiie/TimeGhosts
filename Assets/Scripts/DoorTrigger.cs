@@ -13,13 +13,15 @@ public class DoorTrigger : MonoBehaviour
     Vector3 targetPosition;
     private float startHeight;
     Vector3 startPosition;
-    public int otherColliders;
+    //public int otherColliders;
     Collider[] colliders = new Collider[20];
     bool isPressed;
+    LayerMask mask; 
    
 
     private void Start()
     {
+        mask = LayerMask.GetMask("Player");
 
         if (x)
         {
@@ -55,9 +57,9 @@ public class DoorTrigger : MonoBehaviour
 
     private void FixedUpdate()
     {
-        int numColliders = Physics.OverlapBoxNonAlloc(transform.position, transform.localScale, colliders, Quaternion.identity);
+        int numColliders = Physics.OverlapBoxNonAlloc(transform.position, transform.localScale, colliders, Quaternion.identity, mask);
         //Debug.Log(numColliders);
-        isPressed =  (numColliders> otherColliders ? true : false);
+        isPressed =  (numColliders> 0 ? true : false);
     }
 
 }
