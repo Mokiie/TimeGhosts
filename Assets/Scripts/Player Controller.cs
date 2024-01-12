@@ -19,10 +19,15 @@ public class PlayerController : MonoBehaviour
     private float velocity;
     Vector3 moveDirection;
     [SerializeField] private float jumpPower;
-
+    public Ghost ghost;
+    public GameObject spawnPoint;
+    public GameObject ghostPlayer;
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        ghost.ResetData();
+        ghost.isRecord = true;
+        ghost.isReplay = false;
         
         
     }
@@ -33,6 +38,18 @@ public class PlayerController : MonoBehaviour
         ApplyGravity();
         ApplyRotation();
         ApplyMovement();
+
+
+        if (Input.GetKey("k"))
+        {
+            transform.position = spawnPoint.transform.position;
+            //transform.rotation = spawnPoint.transform.rotation;
+           
+          
+            ghost.isRecord = false;
+            ghost.isReplay = true;
+            ghostPlayer.SetActive(true);
+        }
     }
 
     private void ApplyGravity() 
@@ -59,6 +76,11 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement() 
     {
+
+        if (_input == Vector2.zero)
+        {
+            moveDirection = new Vector3(0, moveDirection.y, 0);
+        }
         _characterController.Move(moveDirection * speed * Time.deltaTime);
     }
 
@@ -67,6 +89,7 @@ public class PlayerController : MonoBehaviour
         _input = context.ReadValue<Vector2>();
         _direction = new Vector3(_input.x, 0.0f, _input.y);
         Debug.Log(_input);
+
     }
     public void Jump(InputAction.CallbackContext context)
     {
@@ -76,4 +99,7 @@ public class PlayerController : MonoBehaviour
         velocity += jumpPower;
     }
     private bool IsGrounded() => _characterController.isGrounded;
+
+
+
 }
