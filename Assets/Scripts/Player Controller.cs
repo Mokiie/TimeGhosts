@@ -19,17 +19,24 @@ public class PlayerController : MonoBehaviour
     private float velocity;
     Vector3 moveDirection;
     [SerializeField] private float jumpPower;
-    public Ghost ghost;
+
+
+
+    //Ghosts
+    // public Ghost ghost;
     public GameObject spawnPoint;
-    public GameObject ghostPlayer;
+    public List<GameObject> ghostPlayers;
+    GhostRecorder gr;
+
+
+
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-        ghost.ResetData();
-        ghost.isRecord = true;
-        ghost.isReplay = false;
-        
-        
+
+        gr = GetComponent<GhostRecorder>();
+       
     }
     
 
@@ -40,15 +47,37 @@ public class PlayerController : MonoBehaviour
         ApplyMovement();
 
 
-        if (Input.GetKey("k"))
+        if (Input.GetKeyDown("k"))
         {
+
+            _characterController.enabled = false;
             transform.position = spawnPoint.transform.position;
+            _characterController.enabled = true;
             //transform.rotation = spawnPoint.transform.rotation;
-           
-          
-            ghost.isRecord = false;
-            ghost.isReplay = true;
-            ghostPlayer.SetActive(true);
+
+            gr.timer = 0;
+            gr.timeValue = 0;
+            gr.ghostList[gr.ghostIndex].isReplay = true;
+            gr.ghostList[gr.ghostIndex].isRecord = false;
+            ghostPlayers[gr.ghostIndex].SetActive(true);
+
+            gr.ghostIndex++;
+
+            if(gr.ghostIndex >= 10)
+            {
+                gr.ghostIndex = 0;
+            }
+
+            gr.ghostList[gr.ghostIndex].isReplay = false;
+            gr.ghostList[gr.ghostIndex].isRecord = true;
+
+            //Reset all ghosts to start time
+            foreach(GameObject gp in ghostPlayers)
+            {
+                gp.GetComponent<GhostPlayer>().timeValue = 0;
+            }
+
+            
         }
     }
 

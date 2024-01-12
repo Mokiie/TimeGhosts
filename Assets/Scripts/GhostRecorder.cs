@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class GhostRecorder : MonoBehaviour
 {
-    public Ghost ghost;
-    private float timer;
-    private float timeValue;
+    //public Ghost ghost;
+    public List<Ghost> ghostList;
+    public float timer;
+    public float timeValue;
+    public int ghostIndex;
 
 
     private void Awake()
     {
-        if (ghost.isRecord)
+        ghostIndex = 0;
+
+        for(int i = 0; i < ghostList.Count; i++)
         {
-            ghost.ResetData();
-            timeValue = 0;
-            timer = 0;
+            ghostList[i].ResetData();
+            ghostList[i].isRecord = false;
+            ghostList[i].isReplay = false;
         }
+        ghostList[0].isRecord = true;
+
+        timeValue = 0;
+        timer = 0;
+        
     }
 
     // Update is called once per frame
@@ -25,11 +34,11 @@ public class GhostRecorder : MonoBehaviour
         timer += Time.deltaTime;
         timeValue += Time.deltaTime;
 
-        if(ghost.isRecord && timer >= 1 / ghost.recordFrequency)
+        if(ghostList[ghostIndex].isRecord && timer >= 1 / ghostList[ghostIndex].recordFrequency)
         {
-            ghost.timeStamp.Add(timeValue);
-            ghost.position.Add(this.transform.position);
-            ghost.rotation.Add(this.transform.eulerAngles);
+            ghostList[ghostIndex].timeStamp.Add(timeValue);
+            ghostList[ghostIndex].position.Add(this.transform.position);
+            ghostList[ghostIndex].rotation.Add(this.transform.eulerAngles);
 
             timer = 0;
         }

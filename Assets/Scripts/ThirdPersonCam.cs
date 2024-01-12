@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThirdPersonCam : MonoBehaviour
 {
-
+    /*
     [Header("References")]
     public Transform orientation;
     public Transform player;
@@ -12,7 +12,7 @@ public class ThirdPersonCam : MonoBehaviour
     public Rigidbody rigidBody;
 
     public float rotationSpeed;
-
+    */
 
     // Start is called before the first frame update
     void Start()
