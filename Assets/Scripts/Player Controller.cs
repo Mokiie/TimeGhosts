@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float velocity;
     Vector3 moveDirection;
     [SerializeField] private float jumpPower;
+    public Timer timer;
 
 
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
 
         gr = GetComponent<GhostRecorder>();
+        
        
     }
     
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown("k"))
         {
-
+            timer.time = 0;
             _characterController.enabled = false;
             transform.position = spawnPoint.transform.position;
             _characterController.enabled = true;

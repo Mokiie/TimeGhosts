@@ -57,7 +57,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void FixedUpdate()
     {
-        int numColliders = Physics.OverlapBoxNonAlloc(transform.position, transform.localScale, colliders, Quaternion.identity, mask);
+        int numColliders = Physics.OverlapBoxNonAlloc(new Vector3(transform.position.x,transform.position.y+3,transform.position.z), transform.localScale/2, colliders, Quaternion.identity, mask);
         //Debug.Log(numColliders);
         isPressed =  (numColliders> 0 ? true : false);
     }
