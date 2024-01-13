@@ -57,9 +57,15 @@ public class DoorTrigger : MonoBehaviour
 
     private void FixedUpdate()
     {
-        int numColliders = Physics.OverlapBoxNonAlloc(new Vector3(transform.position.x,transform.position.y+3,transform.position.z), transform.localScale/2, colliders, Quaternion.identity, mask);
+        int numColliders = Physics.OverlapBoxNonAlloc(new Vector3(transform.position.x,transform.position.y,transform.position.z), new Vector3(transform.localScale.x/1.5f, transform.localScale.y*5, transform.localScale.z/1.5f), colliders, Quaternion.identity, mask);
         //Debug.Log(numColliders);
         isPressed =  (numColliders> 0 ? true : false);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x*1.33f, transform.localScale.y*10, transform.localScale.z*1.33f));
     }
 
 }

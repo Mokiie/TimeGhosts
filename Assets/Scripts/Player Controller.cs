@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         
        
     }
-    
+
 
     private void Update()
     {
@@ -48,38 +48,9 @@ public class PlayerController : MonoBehaviour
         ApplyRotation();
         ApplyMovement();
 
-
         if (Input.GetKeyDown("k"))
         {
-            timer.time = 0;
-            _characterController.enabled = false;
-            transform.position = spawnPoint.transform.position;
-            _characterController.enabled = true;
-            //transform.rotation = spawnPoint.transform.rotation;
-
-            gr.timer = 0;
-            gr.timeValue = 0;
-            gr.ghostList[gr.ghostIndex].isReplay = true;
-            gr.ghostList[gr.ghostIndex].isRecord = false;
-            ghostPlayers[gr.ghostIndex].SetActive(true);
-
-            gr.ghostIndex++;
-
-            if(gr.ghostIndex >= 10)
-            {
-                gr.ghostIndex = 0;
-            }
-
-            gr.ghostList[gr.ghostIndex].isReplay = false;
-            gr.ghostList[gr.ghostIndex].isRecord = true;
-
-            //Reset all ghosts to start time
-            foreach(GameObject gp in ghostPlayers)
-            {
-                gp.GetComponent<GhostPlayer>().timeValue = 0;
-            }
-
-            
+            Die();
         }
     }
 
@@ -131,6 +102,42 @@ public class PlayerController : MonoBehaviour
     }
     private bool IsGrounded() => _characterController.isGrounded;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            Die();
+        }
+    }
 
+    void Die()
+    {
+        timer.time = 0;
+        _characterController.enabled = false;
+        transform.position = spawnPoint.transform.position;
+        _characterController.enabled = true;
+        //transform.rotation = spawnPoint.transform.rotation;
 
+        gr.timer = 0;
+        gr.timeValue = 0;
+        gr.ghostList[gr.ghostIndex].isReplay = true;
+        gr.ghostList[gr.ghostIndex].isRecord = false;
+        ghostPlayers[gr.ghostIndex].SetActive(true);
+
+        gr.ghostIndex++;
+
+        if (gr.ghostIndex >= 10)
+        {
+            gr.ghostIndex = 0;
+        }
+
+        gr.ghostList[gr.ghostIndex].isReplay = false;
+        gr.ghostList[gr.ghostIndex].isRecord = true;
+
+        //Reset all ghosts to start time
+        foreach (GameObject gp in ghostPlayers)
+        {
+            gp.GetComponent<GhostPlayer>().timeValue = 0;
+        }
+    }
 }
