@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
 
 
-
     //Ghosts
     // public Ghost ghost;
     public GameObject spawnPoint;
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
 
         gr = GetComponent<GhostRecorder>();
-        
        
     }
 
@@ -107,6 +105,25 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Bullet")
         {
             Die();
+        }
+
+        if(other.tag == "Checkpoint" && other.gameObject != spawnPoint)
+        {
+            spawnPoint = other.gameObject;
+            
+            //reset ghosts
+            for(int i = 0; i < ghostPlayers.Count; i++)
+            {
+                gr.ghostList[i].ResetData();
+                gr.ghostList[i].isReplay = false;
+                gr.ghostList[i].isRecord = false;
+                ghostPlayers[i].SetActive(false);
+            }
+            gr.ghostList[0].isRecord = true;
+            
+            gr.timeValue = 0;
+            gr.timer = 0;
+            gr.ghostIndex = 0;
         }
     }
 
