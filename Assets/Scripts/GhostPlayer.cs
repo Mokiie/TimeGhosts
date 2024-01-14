@@ -47,17 +47,21 @@ public class GhostPlayer : MonoBehaviour
 
     private void SetTransform()
     {
-        if(index1 == index2)
+        if(ghost.timeStamp.Count > 0)
         {
-            this.transform.position = ghost.position[index1];
-            this.transform.eulerAngles = ghost.rotation[index1];
-        }
-        else
-        {
-            float interpolationFactor = (timeValue - ghost.timeStamp[index1]) / (ghost.timeStamp[index2] - ghost.timeStamp[index1]);
+            if (index1 == index2)
+            {
+                this.transform.position = ghost.position[index1];
+                this.transform.eulerAngles = ghost.rotation[index1];
+            }
+            else
+            {
+                float interpolationFactor = (timeValue - ghost.timeStamp[index1]) / (ghost.timeStamp[index2] - ghost.timeStamp[index1]);
 
-            this.transform.position = Vector3.Lerp(ghost.position[index1], ghost.position[index2], interpolationFactor);
-            this.transform.eulerAngles = Vector3.Lerp(ghost.rotation[index1], ghost.rotation[index2], interpolationFactor);
+                this.transform.position = Vector3.Lerp(ghost.position[index1], ghost.position[index2], interpolationFactor);
+                this.transform.eulerAngles = Vector3.Lerp(ghost.rotation[index1], ghost.rotation[index2], interpolationFactor);
+            }
         }
+        
     }
 }
