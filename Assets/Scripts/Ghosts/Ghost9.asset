@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRecord: 0
   isReplay: 0
-  recordFrequency: 240
+  recordFrequency: 30
   timeStamp: []
   position: []
   rotation: []

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 
 public class PlayerController : MonoBehaviour
@@ -20,8 +22,12 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection;
     [SerializeField] private float jumpPower;
     public Timer timer;
+    public GameObject deathTracker;
+    int deathCount;
+    public Music musicManager;
 
     GameObject originalSpawn;
+    public GameObject quitButton;
 
     //Ghosts
     // public Ghost ghost;
@@ -35,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-
+        deathCount = 0;
         gr = GetComponent<GhostRecorder>();
         originalSpawn = spawnPoint;
     }
@@ -57,6 +63,25 @@ public class PlayerController : MonoBehaviour
             spawnPoint = originalSpawn;
             Die();
             ResetGhosts();
+            musicManager.Music1();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            if (Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+         
         }
     }
 
@@ -126,6 +151,9 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        deathCount++;
+        deathTracker.GetComponent<TextMeshPro>().text = String.Format("You died \n    {0} \n times!", deathCount);
+
         timer.time = 0;
         _characterController.enabled = false;
         transform.position = spawnPoint.transform.position;
