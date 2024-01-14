@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower;
     public Timer timer;
 
+    GameObject originalSpawn;
 
     //Ghosts
     // public Ghost ghost;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
 
         gr = GetComponent<GhostRecorder>();
-       
+        originalSpawn = spawnPoint;
     }
 
 
@@ -49,6 +50,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown("k"))
         {
             Die();
+        }
+
+        if (Input.GetKeyDown("r"))
+        {
+            spawnPoint = originalSpawn;
+            Die();
+            ResetGhosts();
         }
     }
 
@@ -71,7 +79,8 @@ public class PlayerController : MonoBehaviour
         var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentVelocity, smoothTime);
         transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
-        moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+        Vector3 temp = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+        moveDirection = new Vector3(temp.x, moveDirection.y, temp.z);
     }
 
     private void ApplyMovement() 
@@ -87,7 +96,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _input = context.ReadValue<Vector2>();
-        _direction = new Vector3(_input.x, 0.0f, _input.y);
+        _direction = new Vector3(_input.x, moveDirection.y, _input.y);
         Debug.Log(_input);
 
     }
@@ -110,20 +119,8 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Checkpoint" && other.gameObject != spawnPoint)
         {
             spawnPoint = other.gameObject;
+            ResetGhosts();
             
-            //reset ghosts
-            for(int i = 0; i < ghostPlayers.Count; i++)
-            {
-                gr.ghostList[i].ResetData();
-                gr.ghostList[i].isReplay = false;
-                gr.ghostList[i].isRecord = false;
-                ghostPlayers[i].SetActive(false);
-            }
-            gr.ghostList[0].isRecord = true;
-            
-            gr.timeValue = 0;
-            gr.timer = 0;
-            gr.ghostIndex = 0;
         }
     }
 
@@ -148,6 +145,8 @@ public class PlayerController : MonoBehaviour
             gr.ghostIndex = 0;
         }
 
+        gr.ghostList[gr.ghostIndex].ResetData();
+        ghostPlayers[gr.ghostIndex].SetActive(false);
         gr.ghostList[gr.ghostIndex].isReplay = false;
         gr.ghostList[gr.ghostIndex].isRecord = true;
 
@@ -156,5 +155,21 @@ public class PlayerController : MonoBehaviour
         {
             gp.GetComponent<GhostPlayer>().timeValue = 0;
         }
+    }
+
+    void ResetGhosts()
+    {
+        for (int i = 0; i < ghostPlayers.Count; i++)
+        {
+            gr.ghostList[i].ResetData();
+            gr.ghostList[i].isReplay = false;
+            gr.ghostList[i].isRecord = false;
+            ghostPlayers[i].SetActive(false);
+        }
+        gr.ghostList[0].isRecord = true;
+
+        gr.timeValue = 0;
+        gr.timer = 0;
+        gr.ghostIndex = 0;
     }
 }

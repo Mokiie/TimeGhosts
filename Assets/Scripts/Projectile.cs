@@ -5,20 +5,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float lifetime = 20;
-   // private float timer = 0;
-
     private void Awake()
     {
-        //timer = 0;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //timer += Time.deltaTime;
-        //if (timer >= lifetime) 
-         // Destroy(gameObject);
+        //transform.Rotate(0.5f,0.5f,0.5f);
     }
 
     private void OnTriggerEnter(Collider col)
